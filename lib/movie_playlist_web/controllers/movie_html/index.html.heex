@@ -1,0 +1,31 @@
+<div>Movie Page!</div>
+
+<form method="POST">
+    <input type="hidden" name="user_id" value={@user_id}/>
+    <div>Name</div>
+    <input type="text" name="name" />
+
+    <div>Genre</div>
+    <input type="text" name="genre" />
+
+    <div>Duration</div>
+    <input type="text" name="duration" />
+    <input type="hidden" name="_csrf_token" value={@token}>
+
+    <input type="submit" label="Add Movie"/>
+
+
+</form>
+
+<%= for movie <- @movies do %>
+    <%= movie.name %>
+    <%= movie.genre %>
+    <%= movie.duration %>
+    <form method="post" action="/movies/delete">
+        <input type="hidden" name="_csrf_token" value={@token}>
+        <input type="hidden" name="user_id" value={@user_id}/>
+        <input type="hidden" name="movie_id" value={movie.id} />
+        <input type="submit" label="Remove"/>
+    </form>
+<% end %>
+
